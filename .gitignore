@@ -65,3 +65,6 @@ typings/
 
 # Serverless directories
 .serverless
+
+#backup_personal
+backup_files/

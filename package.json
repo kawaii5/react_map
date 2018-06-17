@@ -5,12 +5,33 @@
     "start": "react-scripts start"
   },
   "devDependencies": {
-    "react-scripts": "^1.0.10"
+    "react-scripts": "^1.1.4"
   },
   "dependencies": {
+    "@material-ui/core": "^1.2.1",
+    "ajv": "^6.5.1",
     "mapbox-gl": "^0.39.1",
-    "react": "^15.5.0",
-    "react-dom": "^15.5.0",
-    "react-sidemenu": "0.0.14"
-  }
+    "material-ui": "^0.20.1",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
+    "react-icons": "^2.2.7",
+    "react-sidebar": "^2.3.2"
+  },
+  "description": "Use ReactJS to create a map with a sidebar",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kawaii5/react_map.git"
+  },
+  "author": "Michelle Wang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kawaii5/react_map/issues"
+  },
+  "homepage": "https://github.com/kawaii5/react_map#readme",
+  "keywords": [
+    "reactJS",
+    "sidebar",
+    "mapbox-gl"
+  ]
 }
