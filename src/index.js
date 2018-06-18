@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 
 import mapboxgl from 'mapbox-gl';
 
-import Sidebar from 'react-sidebar';
-import SidebarContent from './sidebar_content';
+import List from '@material-ui/core/List';
+import Drawer from '@material-ui/core/Drawer';
+import AppDrawerNavItem from './AppDrawerNavItem';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
 
@@ -91,33 +92,62 @@ class App extends React.Component {
   }
 
   render() {
-    const sidebar = <SidebarContent />;
+    const mailFolderListItems = (
+      <div>
+        <AppDrawerNavItem depth="0" key="IN" openImmediately="true" title="Cars in Service">
+          <AppDrawerNavItem depth="1" key="IN" openImmediately="true" title="Alpha">
+          </AppDrawerNavItem>
+          <AppDrawerNavItem depth="1" key="IN" openImmediately="true" title="Bravo">
+          </AppDrawerNavItem>
+          <AppDrawerNavItem depth="1" key="IN" openImmediately="true" title="Charlie">
+          </AppDrawerNavItem>
+        </AppDrawerNavItem>
+        <AppDrawerNavItem depth="0" key="STANDINGBY" openImmediately="true" title="Cars Standing By">
+        </AppDrawerNavItem>
+        <AppDrawerNavItem depth="0" key="OUT" openImmediately="true" title="Cars Out of Service">
+        </AppDrawerNavItem>
+      </div>
+    );
 
-    const sidebarProps = {
-      sidebar: sidebar,
-      docked: true,
-      sidebarClassName: 'custom-sidebar-class',
-      open: this.state.open,
-      touch: this.state.touch,
-      shadow: this.state.shadow,
-      pullRight: this.state.pullRight,
-      touchHandleWidth: this.state.touchHandleWidth,
-      dragToggleDistance: this.state.dragToggleDistance,
-      transitions: false,
-      onSetOpen: this.onSetOpen,
-    };
+
+    const drawerWidth = 240;
+
+    const styles = theme => ({
+      drawerPaper: {
+        position: 'relative',
+        width: drawerWidth,
+      },
+      content: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.default,
+        padding: theme.spacing.unit * 3,
+        minWidth: 0, // So the Typography noWrap works
+      },
+      toolbar: theme.mixins.toolbar,
+    });
+
 
     const { lng, lat, zoom } = this.state;
 
     return (
-      <Sidebar {...sidebarProps}>
       <div>
-        <div className="inline-block absolute top left mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold">
-          <div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
-        </div>
-        <div ref={el => this.mapContainer = el} className="absolute top right left bottom" />
+        <Drawer
+          variant="permanent"
+          classes={{
+            paper: styles.drawerPaper,
+          }}
+        >
+          <div className={styles.toolbar} />
+          <List>{mailFolderListItems}</List>
+        </Drawer>
+
+        <main className={styles.content}>
+          <div className="inline-block absolute top left mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold">
+            <div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
+          </div>
+          <div ref={el => this.mapContainer = el} className="absolute top right left bottom" />
+        </main>
       </div>
-      </Sidebar>
     );
   }
 }
