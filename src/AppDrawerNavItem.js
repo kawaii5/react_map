@@ -156,8 +156,22 @@ class AppDrawerNavItem extends React.Component {
           onClick={this.handleClick}
           style={style}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle fill={color} cx="12" cy="12" r="8"/></svg>
-          {title}
+          <div className={classes.rowBlock}>
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle fill={color} cx="12" cy="12" r="8"/></svg>
+              {title}
+            </div>
+            {this.state.open ? (
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" transform="rotate(-90 -3 -3)" width="24" height="24" viewBox="
+0 0 24 24"><path d="M5 8l4 4 4-4z"/></svg>
+              </div>
+            ) : (
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 8l4 4 4-4z"/></svg>
+              </div>
+            )}
+          </div>
         </Button>
         <Collapse in={this.state.open} timeout="auto" unmountOnExit>
           {children}
