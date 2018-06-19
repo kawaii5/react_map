@@ -22,6 +22,8 @@ const styles = theme => ({
     display: 'block',
     paddingTop: 0,
     paddingBottom: 0,
+    width: 250,
+    backgroundColor: '#F5F5F5F2',
   },
   itemLeaf: {
     display: 'flex',
@@ -46,6 +48,12 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  rowBlock: {
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 
@@ -83,7 +91,6 @@ class AppDrawerNavItem extends React.Component {
       children,
       classes,
       depth,
-      href,
       onClick,
       openImmediately,
       title,
@@ -106,7 +113,10 @@ class AppDrawerNavItem extends React.Component {
             onClick={this.handleClickMenu}
             style={style}
           >
-            {title} <Icon>keyboard_arrow_right</Icon>
+            <div className={classes.rowBlock}>
+              <div>{title}</div>
+              <div><Icon>keyboard_arrow_right</Icon></div>
+            </div>
           </Button>
           <Menu
             id="long-menu"
@@ -115,7 +125,7 @@ class AppDrawerNavItem extends React.Component {
             onClose={this.handleCloseMenu}
             PaperProps={{
               style: {
-                marginLeft: 150,
+                marginLeft: 230,
                 textAlign: 'center',
                 width: 200,
               },
@@ -156,7 +166,6 @@ AppDrawerNavItem.propTypes = {
   children: PropTypes.node,
   classes: PropTypes.object.isRequired,
   depth: PropTypes.number.isRequired,
-  href: PropTypes.string,
   onClick: PropTypes.func,
   openImmediately: PropTypes.bool,
   title: PropTypes.string.isRequired,
