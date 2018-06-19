@@ -42,10 +42,6 @@ const styles = theme => ({
       fontWeight: theme.typography.fontWeightMedium,
     },
   },
-  active: {
-    color: theme.palette.primary.main,
-    fontWeight: theme.typography.fontWeightMedium,
-  },
   menuNav: {
     display: 'flex',
     justifyContent: 'center',
@@ -68,11 +64,6 @@ class AppDrawerNavItem extends React.Component {
       return;
     }
 
-    // Center the selected item in the list container.
-    const activeElement = document.querySelector(`.${this.props.classes.active}`);
-    if (activeElement && activeElement.scrollIntoView) {
-      activeElement.scrollIntoView({});
-    }
   }
 
   handleClick = () => {
