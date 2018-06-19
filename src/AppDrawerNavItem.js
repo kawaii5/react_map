@@ -23,26 +23,27 @@ const styles = theme => ({
     paddingTop: 0,
     paddingBottom: 0,
     width: 250,
-    backgroundColor: '#F5F5F5F2',
+    backgroundColor: '#CECECE',
+    fontWeight: theme.typography.fontWeightMedium,
   },
   itemLeaf: {
     display: 'flex',
     paddingTop: 0,
     paddingBottom: 0,
+    backgroundColor: '#FFFFFF',
+    fontWeight: theme.typography.fontWeightRegular,
   },
   button: {
     justifyContent: 'flex-start',
     textTransform: 'none',
     width: '100%',
+    fontWeight: theme.typography.fontWeightMedium,
   },
   buttonLeaf: {
     justifyContent: 'flex-start',
     textTransform: 'none',
     width: '100%',
     fontWeight: theme.typography.fontWeightRegular,
-    '&.depth-0': {
-      fontWeight: theme.typography.fontWeightMedium,
-    },
   },
   menuNav: {
     display: 'flex',
@@ -93,7 +94,10 @@ class AppDrawerNavItem extends React.Component {
       depth,
       onClick,
       openImmediately,
+      isActiveNotif,
       title,
+      color,
+      notifNum,
       ...other
     } = this.props;
 
@@ -152,6 +156,7 @@ class AppDrawerNavItem extends React.Component {
           onClick={this.handleClick}
           style={style}
         >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle fill={color} cx="12" cy="12" r="8"/></svg>
           {title}
         </Button>
         <Collapse in={this.state.open} timeout="auto" unmountOnExit>
@@ -169,6 +174,9 @@ AppDrawerNavItem.propTypes = {
   onClick: PropTypes.func,
   openImmediately: PropTypes.bool,
   title: PropTypes.string.isRequired,
+  notifNum: PropTypes.number,
+  isActiveNotif: PropTypes.bool,
+  color: PropTypes.string,
 };
 
 AppDrawerNavItem.defaultProps = {

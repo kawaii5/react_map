@@ -42,32 +42,49 @@ class App extends React.Component {
     });
   }
 
+  grabObject(mainObj) {
+    const { toArray } = React.Children;
+    return toArray(mainObj.children).filter(c => c.props.isActiveNotif).length;
+  }
+
   render() {
-    const carList = (
-      <div>
-        <AppDrawerNavItem depth="0" key="IN" openImmediately="true" title="Cars in Service">
-          <AppDrawerNavItem depth="1" key="IN" title="Alpha"></AppDrawerNavItem>
-          <AppDrawerNavItem depth="1" key="IN" title="Bravo"></AppDrawerNavItem>
-          <AppDrawerNavItem depth="1" key="IN" title="Charlie"></AppDrawerNavItem>
-        </AppDrawerNavItem>
-        <Divider/>
-        <AppDrawerNavItem depth="0" key="STANDINGBY" title="Cars Standing By">
-          <AppDrawerNavItem depth="1" key="STANDINGBY" title="Echo"></AppDrawerNavItem>
-        </AppDrawerNavItem>
-        <Divider/>
-        <AppDrawerNavItem depth="0" key="OUT" title="Cars Out of Service" onClick={this.props.onClose}>
-          <AppDrawerNavItem depth="1" key="OUT" title="Delta"></AppDrawerNavItem>
-        </AppDrawerNavItem>
-        <Divider/>
-      </div>
+    const styles = theme => ({
+      dark: {
+        backgroundColor: '#F5F5F5F2',
+      },
+    });
+
+    const carListService = (
+      <AppDrawerNavItem depth="0" key="IN" openImmediately="true" title="Cars in Service" color="#00FF04" notifNum="2">
+        <AppDrawerNavItem depth="1" key="IN" title="Alpha" isActiveNotif="true"></AppDrawerNavItem>
+        <AppDrawerNavItem depth="1" key="IN" title="Bravo"></AppDrawerNavItem>
+        <AppDrawerNavItem depth="1" key="IN" title="Charlie"></AppDrawerNavItem>
+      </AppDrawerNavItem>
+    );
+
+    const carListStandby = (
+      <AppDrawerNavItem depth="0" key="STANDINGBY" title="Cars Standing By" color="#FFDB6A">
+        <AppDrawerNavItem depth="1" key="STANDINGBY" title="Echo"></AppDrawerNavItem>
+      </AppDrawerNavItem>
+    );
+
+    const carListOut = (
+      <AppDrawerNavItem depth="0" key="OUT" title="Cars Out of Service" color="#7E7E7E">
+        <AppDrawerNavItem depth="1" key="OUT" title="Delta"></AppDrawerNavItem>
+      </AppDrawerNavItem>
     );
 
     const { lng, lat, zoom } = this.state;
 
     return (
-      <div>
-        <Drawer variant="permanent">
-          <List>{carList}</List>
+      <div style={{backgroundColor: '#F5F5F5F2'}}>
+        <Drawer style={{backgroundColor: '#F5F5F5F2'}} variant="permanent">
+          <List className={styles.dark}>{carListService}</List>
+          <Divider/>
+          <List className={styles.dark}>{carListStandby}</List>
+          <Divider/>
+          <List className={styles.dark}>{carListOut}</List>
+          <Divider/>
         </Drawer>
         <div className="inline-block absolute top right mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold">
           <div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
