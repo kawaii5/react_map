@@ -6,6 +6,17 @@ import ListItem from '@material-ui/core/ListItem';
 import Button from '@material-ui/core/Button';
 import Collapse from '@material-ui/core/Collapse';
 
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Icon from '@material-ui/core/Icon';
+
+const options = [
+  'Call',
+  'Report',
+  'Escalate',
+  'Dismiss',
+];
+
 const styles = theme => ({
   item: {
     display: 'block',
@@ -35,12 +46,21 @@ const styles = theme => ({
     color: theme.palette.primary.main,
     fontWeight: theme.typography.fontWeightMedium,
   },
+  menuNav: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 class AppDrawerNavItem extends React.Component {
-  state = {
-    open: this.props.openImmediately,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: props.openImmediately,
+      anchorEl: null,
+    };
+  }
 
   componentDidMount() {
     // So we only run this logic once.
@@ -59,6 +79,14 @@ class AppDrawerNavItem extends React.Component {
     this.setState({ open: !this.state.open });
   };
 
+  handleClickMenu = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleCloseMenu = () => {
+    this.setState({ anchorEl: null });
+  };
+  
   render() {
     const {
       children,
@@ -75,17 +103,40 @@ class AppDrawerNavItem extends React.Component {
       paddingLeft: 8 * (3 + 2 * depth),
     };
 
-    if (href) {
+    if (depth > 0) {
       return (
         <ListItem className={classes.itemLeaf} disableGutters {...other}>
           <Button
+            aria-label="More"
+            aria-owns={this.state.anchorEl ? 'long-menu' : null}
+            aria-haspopup="true"
             className={classNames(classes.buttonLeaf, `depth-${depth}`)}
             disableRipple
-            onClick={onClick}
+            onClick={this.handleClickMenu}
             style={style}
           >
-            {title}
+            {title} <Icon>keyboard_arrow_right</Icon>
           </Button>
+          <Menu
+            id="long-menu"
+            anchorEl={this.state.anchorEl}
+            open={Boolean(this.state.anchorEl)}
+            onClose={this.handleCloseMenu}
+            PaperProps={{
+              style: {
+                marginLeft: 150,
+                textAlign: 'center',
+                width: 200,
+              },
+            }}
+          >
+            {options.map(option => (
+              <MenuItem className={classes.menuNav} key={option}>
+                {option}
+              </MenuItem>
+            ))}
+            <Icon>more_horiz</Icon>
+          </Menu>
         </ListItem>
       );
     }
