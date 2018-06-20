@@ -1,8 +1,8 @@
-# react_map
+# ReactJS map + MaterialUI
 ## Description
 Project containing a map (using mapbox-gl) and a sidebar that will have dropdowns and menus for "cars"
 
-## Build
+## Set Up and Run
 ```
 npm install
 npm run
