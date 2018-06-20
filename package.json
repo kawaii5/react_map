@@ -30,6 +30,8 @@
   "keywords": [
     "reactJS",
     "sidebar",
-    "mapbox-gl"
+    "mapbox-gl",
+    "@material-ui",
+    "material-ui"
   ]
 }
