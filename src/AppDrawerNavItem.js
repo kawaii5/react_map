@@ -95,9 +95,9 @@ class AppDrawerNavItem extends React.Component {
       onClick,
       openImmediately,
       isActiveNotif,
+      notifNum,
       title,
       color,
-      notifNum,
       ...other
     } = this.props;
 
@@ -146,6 +146,8 @@ class AppDrawerNavItem extends React.Component {
       );
     }
 
+    const notifBool = notifNum > 0 ? true : false;
+
     return (
       <ListItem className={classes.item} disableGutters {...other}>
         <Button
@@ -158,19 +160,30 @@ class AppDrawerNavItem extends React.Component {
         >
           <div className={classes.rowBlock}>
             <div>
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle fill={color} cx="12" cy="12" r="8"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <circle fill={color} cx="12" cy="12" r="8"/>
+              </svg>
               {title}
             </div>
-            {this.state.open ? (
-              <div>
-                <svg xmlns="http://www.w3.org/2000/svg" transform="rotate(-90 -3 -3)" width="24" height="24" viewBox="
-0 0 24 24"><path d="M5 8l4 4 4-4z"/></svg>
-              </div>
-            ) : (
-              <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 8l4 4 4-4z"/></svg>
-              </div>
-            )}
+            <div>
+              {notifBool ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <circle fill="#FF1F1F" cx="12" cy="12" r="8"/>
+                    <text textAnchor="middle" x="12" y="17" fill="white">{notifNum}</text>
+                  </svg>
+              ) : (
+                null
+              )}
+              {this.state.open ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" transform="rotate(-90 -3 -3)" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M5 8l4 4 4-4z"/>
+                  </svg>
+              ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M5 8l4 4 4-4z"/>
+                  </svg>
+              )}
+            </div>
           </div>
         </Button>
         <Collapse in={this.state.open} timeout="auto" unmountOnExit>
@@ -188,8 +201,8 @@ AppDrawerNavItem.propTypes = {
   onClick: PropTypes.func,
   openImmediately: PropTypes.bool,
   title: PropTypes.string.isRequired,
-  notifNum: PropTypes.number,
   isActiveNotif: PropTypes.bool,
+  notifNum: PropTypes.number,
   color: PropTypes.string,
 };
 

@@ -42,11 +42,6 @@ class App extends React.Component {
     });
   }
 
-  grabObject(mainObj) {
-    const { toArray } = React.Children;
-    return toArray(mainObj.children).filter(c => c.props.isActiveNotif).length;
-  }
-
   render() {
     const styles = theme => ({
       dark: {
