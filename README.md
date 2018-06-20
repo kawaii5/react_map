@@ -1,12 +1,12 @@
 # react_map
-##Description
+## Description
 Project containing a map (using mapbox-gl) and a sidebar that will have dropdowns and menus for "cars"
 
-##Build
+## Build
 npm install
 npm run
 
-##Libraries:
+## Libraries:
 - react
 - [mapbox-gl](https://www.mapbox.com/)
   - [Reference](https://github.com/mapbox/mapbox-react-examples/tree/master/basic)
