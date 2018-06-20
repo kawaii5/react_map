@@ -14,6 +14,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    // Default map location focus
     this.state = {
       lng: -120,
       lat: 33,
@@ -53,12 +54,7 @@ class App extends React.Component {
   };
 
   render() {
-    const styles = theme => ({
-      dark: {
-        backgroundColor: '#F5F5F5F2',
-      },
-    });
-
+    // List for each Header
     const service = [
       {key: "Alpha", value: 1},
       {key: "Bravo", value: 0},
@@ -76,6 +72,7 @@ class App extends React.Component {
       notifNumber += service[i].value;
     }
 
+    // Formatting the nested menu
     const carListService = (
       <AppDrawerNavItem depth="0" key="IN" openImmediately="true" title="Cars in Service" color="#00FF04" notifNum={notifNumber}> 
         {service.map(option => (
@@ -83,7 +80,6 @@ class App extends React.Component {
         ))}
       </AppDrawerNavItem>
     );
-
     const carListStandby = (
       <AppDrawerNavItem depth="0" key="STANDINGBY" title="Cars Standing By" color="#FFDB6A">
         {standby.map(option => (
@@ -91,7 +87,6 @@ class App extends React.Component {
         ))}
       </AppDrawerNavItem>
     );
-
     const carListOut = (
       <AppDrawerNavItem depth="0" key="OUT" title="Cars Out of Service" color="#7E7E7E">
         {out.map(option => (
@@ -103,13 +98,13 @@ class App extends React.Component {
     const { lng, lat, zoom } = this.state;
 
     return (
-      <div style={{backgroundColor: '#F5F5F5F2'}}>
-        <Drawer style={{backgroundColor: '#F5F5F5F2'}} variant="permanent">
-          <List className={styles.dark}>{carListService}</List>
+      <div>
+        <Drawer variant="permanent">
+          <List>{carListService}</List>
           <Divider/>
-          <List className={styles.dark}>{carListStandby}</List>
+          <List>{carListStandby}</List>
           <Divider/>
-          <List className={styles.dark}>{carListOut}</List>
+          <List>{carListOut}</List>
           <Divider/>
         </Drawer>
         <div className="inline-block absolute top right mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold">

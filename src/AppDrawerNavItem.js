@@ -72,13 +72,14 @@ class AppDrawerNavItem extends React.Component {
     if (!this.props.openImmediately) {
       return;
     }
-
   }
 
+  // Side nav menu dropdown - show/hide
   handleClick = () => {
     this.setState({ open: !this.state.open });
   };
 
+  // Menu pop-up actions
   handleClickMenu = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
@@ -105,8 +106,10 @@ class AppDrawerNavItem extends React.Component {
       paddingLeft: 8 * (3 + 2 * depth),
     };
 
+    // Change the Active variable to a bool
     const isActive = isActiveNotif > 0 ? true : false;
 
+    // Options that are shown under each Header
     if (depth > 0) {
       return (
         <ListItem className={classes.itemLeaf} disableGutters {...other}>
@@ -156,8 +159,10 @@ class AppDrawerNavItem extends React.Component {
       );
     }
 
+    // notifNum stores how many "cars" need attention
     const notifBool = notifNum > 0 ? true : false;
 
+    // Header Options
     return (
       <ListItem className={classes.item} disableGutters {...other}>
         <Button
