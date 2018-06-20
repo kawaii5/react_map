@@ -121,4 +121,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('sidebar'));
+ReactDOM.render(<App />, document.getElementById('application'));
