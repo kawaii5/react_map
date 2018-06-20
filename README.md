@@ -3,8 +3,10 @@
 Project containing a map (using mapbox-gl) and a sidebar that will have dropdowns and menus for "cars"
 
 ## Build
+```
 npm install
 npm run
+```
 
 ## Libraries:
 - react
