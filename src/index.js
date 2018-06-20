@@ -63,7 +63,8 @@ class App extends React.Component {
 
   createDrawerNav(carList, title, key, openImmediately, color, notifNum) {
     return (
-      <AppDrawerNavItem depth="0" key={key} openImmediately={openImmediately} title={title} color={color} notifNum={notifNum}>
+      <AppDrawerNavItem depth="0" key={key} openImmediately={openImmediately}
+                        title={title} color={color} notifNum={notifNum}>
         {carList.map(option => (
           <AppDrawerNavItem depth="1" key={key} title={option.carName} isActiveNotif={option.isActive}/>
         ))}
@@ -95,7 +96,7 @@ class App extends React.Component {
     const carListStandby = 
       this.createDrawerNav(standby, "Cars Standing By", "STANDBY", false, "#FFDB6A", notifStandbyNumber);
     const carListOut = 
-      this.createDrawerNav(standby, "Cars Out of Service", "OUT", false, "#7E7E7E", notifOutNumber);
+      this.createDrawerNav(out, "Cars Out of Service", "OUT", false, "#7E7E7E", notifOutNumber);
 
     const { lng, lat, zoom } = this.state;
 
