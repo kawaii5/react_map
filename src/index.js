@@ -43,16 +43,7 @@ class App extends React.Component {
     });
   }
 
-  ObjectLength( object ) {
-    var length = 0;
-    for( var key in object ) {
-        if( object.hasOwnProperty(key) ) {
-            ++length;
-        }
-    }
-    return length;
-  };
-
+  // Sums up the "isActive" in the carList
   countActive(carList) {
     var notifNumber = 0;
     for (var i=0; i < carList.length; ++i) {
@@ -61,6 +52,7 @@ class App extends React.Component {
     return notifNumber;
   }
 
+  // Creates the drawer list
   createDrawerNav(carList, title, key, openImmediately, color, notifNum) {
     return (
       <AppDrawerNavItem depth="0" key={key} openImmediately={openImmediately}
