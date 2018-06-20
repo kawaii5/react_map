@@ -53,47 +53,49 @@ class App extends React.Component {
     return length;
   };
 
+  countActive(carList) {
+    var notifNumber = 0;
+    for (var i=0; i < carList.length; ++i) {
+      notifNumber += carList[i].isActive;
+    }
+    return notifNumber;
+  }
+
+  createDrawerNav(carList, title, key, openImmediately, color, notifNum) {
+    return (
+      <AppDrawerNavItem depth="0" key={key} openImmediately={openImmediately} title={title} color={color} notifNum={notifNum}>
+        {carList.map(option => (
+          <AppDrawerNavItem depth="1" key={key} title={option.carName} isActiveNotif={option.isActive}/>
+        ))}
+      </AppDrawerNavItem>
+    );
+  }
+
   render() {
     // List for each Header
     const service = [
-      {key: "Alpha", value: 1},
-      {key: "Bravo", value: 0},
-      {key: "Charlie", value: 1},
+      {carName: "Alpha", isActive: 1},
+      {carName: "Bravo", isActive: 0},
+      {carName: "Charlie", isActive: 1},
     ];
     const standby = [
-      {key: "Echo", value: 0},
+      {carName: "Echo", isActive: 0},
     ];
     const out = [
-      {key: "Delta", value: 0},
+      {carName: "Delta", isActive: 0},
     ];
 
-    var notifNumber = 0;
-    for (var i=0; i < service.length; ++i) {
-      notifNumber += service[i].value;
-    }
+    var notifServiceNumber = this.countActive(service);
+    var notifStandbyNumber = this.countActive(standby);
+    var notifOutNumber = this.countActive(out);
 
     // Formatting the nested menu
-    const carListService = (
-      <AppDrawerNavItem depth="0" key="IN" openImmediately="true" title="Cars in Service" color="#00FF04" notifNum={notifNumber}> 
-        {service.map(option => (
-          <AppDrawerNavItem depth="1" key="IN" title={option.key} isActiveNotif={option.value}/>
-        ))}
-      </AppDrawerNavItem>
-    );
-    const carListStandby = (
-      <AppDrawerNavItem depth="0" key="STANDINGBY" title="Cars Standing By" color="#FFDB6A">
-        {standby.map(option => (
-          <AppDrawerNavItem depth="1" key="STANDINGBY" title={option.key} isActiveNotif={option.value}/>
-        ))}
-      </AppDrawerNavItem>
-    );
-    const carListOut = (
-      <AppDrawerNavItem depth="0" key="OUT" title="Cars Out of Service" color="#7E7E7E">
-        {out.map(option => (
-          <AppDrawerNavItem depth="1" key="OUT" title={option.key} isActiveNotif={option.value}/>
-        ))}
-      </AppDrawerNavItem>
-    );
+    const carListService = 
+      this.createDrawerNav(service, "Cars in Service", "IN", true, "#00FF04", notifServiceNumber);
+    const carListStandby = 
+      this.createDrawerNav(standby, "Cars Standing By", "STANDBY", false, "#FFDB6A", notifStandbyNumber);
+    const carListOut = 
+      this.createDrawerNav(standby, "Cars Out of Service", "OUT", false, "#7E7E7E", notifOutNumber);
 
     const { lng, lat, zoom } = this.state;
 
