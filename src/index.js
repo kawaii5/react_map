@@ -42,6 +42,16 @@ class App extends React.Component {
     });
   }
 
+  ObjectLength( object ) {
+    var length = 0;
+    for( var key in object ) {
+        if( object.hasOwnProperty(key) ) {
+            ++length;
+        }
+    }
+    return length;
+  };
+
   render() {
     const styles = theme => ({
       dark: {
@@ -49,23 +59,44 @@ class App extends React.Component {
       },
     });
 
+    const service = [
+      {key: "Alpha", value: 1},
+      {key: "Bravo", value: 0},
+      {key: "Charlie", value: 1},
+    ];
+    const standby = [
+      {key: "Echo", value: 0},
+    ];
+    const out = [
+      {key: "Delta", value: 0},
+    ];
+
+    var notifNumber = 0;
+    for (var i=0; i < service.length; ++i) {
+      notifNumber += service[i].value;
+    }
+
     const carListService = (
-      <AppDrawerNavItem depth="0" key="IN" openImmediately="true" title="Cars in Service" color="#00FF04" notifNum="2">
-        <AppDrawerNavItem depth="1" key="IN" title="Alpha" isActiveNotif="true"></AppDrawerNavItem>
-        <AppDrawerNavItem depth="1" key="IN" title="Bravo"></AppDrawerNavItem>
-        <AppDrawerNavItem depth="1" key="IN" title="Charlie"></AppDrawerNavItem>
+      <AppDrawerNavItem depth="0" key="IN" openImmediately="true" title="Cars in Service" color="#00FF04" notifNum={notifNumber}> 
+        {service.map(option => (
+          <AppDrawerNavItem depth="1" key="IN" title={option.key} isActiveNotif={option.value}/>
+        ))}
       </AppDrawerNavItem>
     );
 
     const carListStandby = (
       <AppDrawerNavItem depth="0" key="STANDINGBY" title="Cars Standing By" color="#FFDB6A">
-        <AppDrawerNavItem depth="1" key="STANDINGBY" title="Echo"></AppDrawerNavItem>
+        {standby.map(option => (
+          <AppDrawerNavItem depth="1" key="STANDINGBY" title={option.key} isActiveNotif={option.value}/>
+        ))}
       </AppDrawerNavItem>
     );
 
     const carListOut = (
       <AppDrawerNavItem depth="0" key="OUT" title="Cars Out of Service" color="#7E7E7E">
-        <AppDrawerNavItem depth="1" key="OUT" title="Delta"></AppDrawerNavItem>
+        {out.map(option => (
+          <AppDrawerNavItem depth="1" key="OUT" title={option.key} isActiveNotif={option.value}/>
+        ))}
       </AppDrawerNavItem>
     );
 

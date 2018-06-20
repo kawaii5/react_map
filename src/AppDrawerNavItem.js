@@ -105,6 +105,8 @@ class AppDrawerNavItem extends React.Component {
       paddingLeft: 8 * (3 + 2 * depth),
     };
 
+    const isActive = isActiveNotif > 0 ? true : false;
+
     if (depth > 0) {
       return (
         <ListItem className={classes.itemLeaf} disableGutters {...other}>
@@ -118,7 +120,15 @@ class AppDrawerNavItem extends React.Component {
             style={style}
           >
             <div className={classes.rowBlock}>
-              <div>{title}</div>
+              <div>
+                <svg height="24" width="100">
+                  {isActive ? (
+                    <text x="0" y="17" fill="red">{title}</text>
+                  ) : (
+                    <text x="0" y="17" fill="gray">{title}</text>
+                  )}
+                </svg>
+              </div>
               <div><Icon>keyboard_arrow_right</Icon></div>
             </div>
           </Button>
@@ -201,7 +211,7 @@ AppDrawerNavItem.propTypes = {
   onClick: PropTypes.func,
   openImmediately: PropTypes.bool,
   title: PropTypes.string.isRequired,
-  isActiveNotif: PropTypes.bool,
+  isActiveNotif: PropTypes.number,
   notifNum: PropTypes.number,
   color: PropTypes.string,
 };
