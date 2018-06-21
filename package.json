@@ -1,10 +1,17 @@
 {
   "name": "react_map",
   "version": "0.0.0",
+  "private": true,
+  "homepage": "https://github.com/kawaii5/react_map",
   "scripts": {
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
+    "gh-pages": "^1.0.0",
     "react-scripts": "^1.1.4"
   },
   "dependencies": {
@@ -26,12 +33,14 @@
   "bugs": {
     "url": "https://github.com/kawaii5/react_map/issues"
   },
-  "homepage": "https://github.com/kawaii5/react_map#readme",
   "keywords": [
     "reactJS",
     "sidebar",
     "mapbox-gl",
     "@material-ui",
     "material-ui"
-  ]
+  ],
+  "directories": {
+    "doc": "docs"
+  }
 }
